@@ -293,10 +293,25 @@ correctStreak = 0
 correctTimes = 0
 points = 0
 i = 0
+print("Before we start, let's set some limits..")
+limits = input("""
+In one string together, with spaces, set the lower bound and upper bound
+A) 单元一----林黛玉进贾府 (0-11)
+B) 单元二----吃茶喝茶品茶 (12-25)
+C) 单元二----喜怒衰乐与健康 (26-36)
+D) 单元三----远亲不如近邻 (37-48)
+E) 单元三----老吾老以及人之老 (49-60)
+F) 成语 (61-120)
+""")
+lowBound = int(limits.split(" ")[0])
+highBound = int(limits.split(" ")[1])
 while i < 10:
-    chosen = random.randint(0, len(ciyus))
+    if len(chosenNums) >= highBound-lowBound:
+        print("OOPS RAN OUT")
+        break
+    chosen = random.randint(lowBound, highBound)
     while chosen in chosenNums:
-        chosen = random.randint(0, len(ciyus))
+        chosen = random.randint(lowBound, highBound)
     chosenNums.append(chosen)
     ans = input(f"{i+1}. {hypys[chosen]}\nGive answer: ")
     if ans != ciyus[chosen]:
@@ -304,19 +319,25 @@ while i < 10:
         points -= 1
         print(f'Wrong! The word was {ciyus[chosen]}. Restarting..')
         if ciyus[chosen] not in wrongWords:
-            ciyus[chosen] = [1, 0]
+            wrongWords[chosen] = 0
         else:
-            ciyus[chosen][0] += 1
+            wrongWords[chosen] += 1
         print(f"Do you at least know the meaning of the word?")
         input("Enter the meaning in your interpretation: ")
         print(meanings[chosen])
         match = input("Did it match with the above meaning? Y/N: ")
         if match == "N":
             print(f"Dang :(")
-            ciyus[chosen][1] += 1
         else:
             print("Oh yay!")
         chosenNums.pop()
+        input("Okay how bout try come up with a SENTENCE with it? ")
+        print(zaojus[chosen])
+        match = input("Is the sentence good AND proper? ")
+        if match == "N":
+            print(f"Dang :(. We forgive tho.")
+        else:
+            print("Oh yay!")
         i = 0
     else:
         print('Correct! Though, did you WRITE your word wrong?')
@@ -327,16 +348,22 @@ while i < 10:
             points -= 1
             print("Hm, okay. That's fine.")
             if ciyus[chosen] not in wrongWords:
-                ciyus[chosen] = [1, 0]
+                wrongWords[chosen] = 0
             else:
-                ciyus[chosen][0] += 1
+                wrongWords[chosen] += 1
             print(f"Do you at least know the meaning of the word?")
             input("Enter the meaning in your interpretation: ")
             print(meanings[chosen])
             match = input("Did it match with the above meaning? Y/N: ")
             if match == "N":
                 print(f"Dang :(")
-                ciyus[chosen][1] += 1
+            else:
+                print("Oh yay!")
+            input("Okay how bout try come up with a SENTENCE with it? ")
+            print(zaojus[chosen])
+            match = input("Is the sentence good AND proper? ")
+            if match == "N":
+                print(f"Dang :(. We forgive tho.")
             else:
                 print("Oh yay!")
             chosenNums.pop()
@@ -354,11 +381,17 @@ while i < 10:
                 print("Oh yay!")
             correctWords.append(ans)
             correctTimes += 1
+            input("Okay how bout try come up with a SENTENCE with it? ")
+            print(zaojus[chosen])
+            match = input("Is the sentence good AND proper? ")
+            if match == "N":
+                print(f"Dang :(. We forgive tho.")
+            else:
+                print("Oh yay!")
             i += 1
     correctStreak = max(correctStreak, correctTimes)
 print("In conclusion..")
 print(f"You have gotten for some words, especially..")
-wrongWords.sort()
 print(" Wrong Attempts | Word ")
 for word in wrongWords:
     print(word)
