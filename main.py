@@ -286,6 +286,7 @@ with open("ciyu.txt", encoding='utf-8') as f : ciyus = f.read().split('\n')
 with open("hypy.txt", encoding='utf-8') as f : hypys = f.read().split('\n')
 with open("zaoju.txt", encoding='utf-8') as f : zaojus = f.read().split('\n')
 with open("meanings.txt", encoding='utf-8') as f : meanings = f.read().split('\n')
+print(len(hypys), len(ciyus), len(zaojus), len(meanings))
 chosenNums = []
 wrongWords = {}
 correctWords = []
@@ -300,12 +301,13 @@ A) 单元一----林黛玉进贾府 (0-11)
 B) 单元二----吃茶喝茶品茶 (12-25)
 C) 单元二----喜怒衰乐与健康 (26-36)
 D) 单元三----远亲不如近邻 (37-48)
-E) 单元三----老吾老以及人之老 (49-60)
-F) 成语 (61-120)
+E) 单元三----老吾老以及人之老 (49-59)
+F) 成语 (60-119)
 """)
 lowBound = int(limits.split(" ")[0])
 highBound = int(limits.split(" ")[1])
-while i < 10:
+print(lowBound, highBound)
+while i < 50:
     if len(chosenNums) >= highBound-lowBound:
         print("OOPS RAN OUT")
         break
@@ -313,15 +315,16 @@ while i < 10:
     while chosen in chosenNums:
         chosen = random.randint(lowBound, highBound)
     chosenNums.append(chosen)
+    print(chosen)
     ans = input(f"{i+1}. {hypys[chosen]}\nGive answer: ")
     if ans != ciyus[chosen]:
         correctTimes = 0
         points -= 1
         print(f'Wrong! The word was {ciyus[chosen]}. Restarting..')
         if ciyus[chosen] not in wrongWords:
-            wrongWords[chosen] = 0
+            wrongWords[ciyus[chosen]] = 0
         else:
-            wrongWords[chosen] += 1
+            wrongWords[ciyus[chosen]] += 1
         print(f"Do you at least know the meaning of the word?")
         input("Enter the meaning in your interpretation: ")
         print(meanings[chosen])
@@ -338,19 +341,22 @@ while i < 10:
             print(f"Dang :(. We forgive tho.")
         else:
             print("Oh yay!")
-        i = 0
+        if i >= 5:
+            i -= 5
+        else:
+            i = 0
     else:
         print('Correct! Though, did you WRITE your word wrong?')
         print(ciyus[chosen])
         writeWrong = input("Y/N")
         if writeWrong == "Y":
             correctTimes = 0
-            points -= 1
+            points -= 5
             print("Hm, okay. That's fine.")
             if ciyus[chosen] not in wrongWords:
-                wrongWords[chosen] = 0
+                wrongWords[ciyus[chosen]] = 0
             else:
-                wrongWords[chosen] += 1
+                wrongWords[ciyus[chosen]] += 1
             print(f"Do you at least know the meaning of the word?")
             input("Enter the meaning in your interpretation: ")
             print(meanings[chosen])
@@ -367,7 +373,10 @@ while i < 10:
             else:
                 print("Oh yay!")
             chosenNums.pop()
-            i = 0
+            if i >= 5:
+                i -= 5
+            else:
+                i = 0
         else:
             points += 1
             print("Great!")
@@ -394,10 +403,10 @@ print("In conclusion..")
 print(f"You have gotten for some words, especially..")
 print(" Wrong Attempts | Word ")
 for word in wrongWords:
-    print(word)
+    print(f" {wrongWords[word]} | {word}")
 print(f"You managed to maintain a streak of correct answers, at around {correctStreak} answers correct in a row.")
 print(f"Overall, your score was {points}")
-if points == 50:
+if points >= 50:
     print("This is A+ grade")
 elif points >= 40:
     print("This is A grade")
