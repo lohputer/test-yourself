@@ -180,12 +180,11 @@ while i < 50:
     while chosen in chosenNums:
         chosen = random.randint(lowBound, highBound)
     chosenNums.append(chosen)
-    print(chosen)
-    ans = input(f"{i+1}. {hypys[chosen]}\nGive answer: ")
+    ans = input(f"{i+1}. {ciyus[chosen]}\nGive answer: ")
     if ans != ciyus[chosen]:
         correctTimes = 0
         points -= 1
-        print(f'Wrong! The word was {ciyus[chosen]}. Restarting..')
+        print(f'Wrong!')
         if ciyus[chosen] not in wrongWords:
             wrongWords[ciyus[chosen]] = 0
         else:
@@ -196,6 +195,7 @@ while i < 50:
         match = input("Did it match with the above meaning? Y/N: ")
         if match == "N":
             print(f"Dang :(")
+            points -= 1
         else:
             print("Oh yay!")
         chosenNums.pop()
@@ -203,7 +203,8 @@ while i < 50:
         print(zaojus[chosen])
         match = input("Is the sentence good AND proper? ")
         if match == "N":
-            print(f"Dang :(. We forgive tho.")
+            print(f"Dang :(")
+            points -= 1
         else:
             print("Oh yay!")
         if i >= 5:
@@ -211,58 +212,28 @@ while i < 50:
         else:
             i = 0
     else:
-        print('Correct! Though, did you WRITE your word wrong?')
-        print(ciyus[chosen])
-        writeWrong = input("Y/N")
-        if writeWrong == "Y":
-            correctTimes = 0
-            points -= 5
-            print("Hm, okay. That's fine.")
-            if ciyus[chosen] not in wrongWords:
-                wrongWords[ciyus[chosen]] = 0
-            else:
-                wrongWords[ciyus[chosen]] += 1
-            print(f"Do you at least know the meaning of the word?")
-            input("Enter the meaning in your interpretation: ")
-            print(meanings[chosen])
-            match = input("Did it match with the above meaning? Y/N: ")
-            if match == "N":
-                print(f"Dang :(")
-            else:
-                print("Oh yay!")
-            input("Okay how bout try come up with a SENTENCE with it? ")
-            print(zaojus[chosen])
-            match = input("Is the sentence good AND proper? ")
-            if match == "N":
-                print(f"Dang :(. We forgive tho.")
-            else:
-                print("Oh yay!")
-            chosenNums.pop()
-            if i >= 5:
-                i -= 5
-            else:
-                i = 0
+        points += 3
+        print("Great!")
+        print(f"Do YOU know the meaning of the word?")
+        input("Enter the meaning in your interpretation: ")
+        print(meanings[chosen])
+        match = input("Did it match with the above meaning? Y/N: ")
+        if match == "N":
+            print(f"Dang :(.")
+            points -= 1
         else:
-            points += 1
-            print("Great!")
-            print(f"Do YOU know the meaning of the word?")
-            input("Enter the meaning in your interpretation: ")
-            print(meanings[chosen])
-            match = input("Did it match with the above meaning? Y/N: ")
-            if match == "N":
-                print(f"Dang :(. We forgive tho.")
-            else:
-                print("Oh yay!")
-            correctWords.append(ans)
-            correctTimes += 1
-            input("Okay how bout try come up with a SENTENCE with it? ")
-            print(zaojus[chosen])
-            match = input("Is the sentence good AND proper? ")
-            if match == "N":
-                print(f"Dang :(. We forgive tho.")
-            else:
-                print("Oh yay!")
-            i += 1
+            print("Oh yay!")
+        correctWords.append(ans)
+        correctTimes += 1
+        input("Okay how bout try come up with a SENTENCE with it? ")
+        print(zaojus[chosen])
+        match = input("Is the sentence good AND proper? ")
+        if match == "N":
+            print(f"Dang :(")
+            points -= 1
+        else:
+            print("Oh yay!")
+        i += 1
     correctStreak = max(correctStreak, correctTimes)
 print("In conclusion..")
 print(f"You have gotten for some words, especially..")
