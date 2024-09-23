@@ -13,12 +13,12 @@ def format_sentences(sentences):
             hypy = part[max(part.find("("),part.find("（"))+1:max(part.find(")"),part.find("）"))]
             hypys.append(hypy)
             zaoju = part[part.find("例")+1:part[part.find("例")+1:].find("\n")]
-            zaojus.append(zaoju)
+            zaojus.append(zaoju[1:])
             meaning = part[part.find("解释"):part.find("\n例")]
             meanings.append(meaning)
 
-    with open("meanings.txt", "a", encoding='utf-8') as f1:
-        for line in meanings:
+    with open("hypy.txt", "a", encoding='utf-8') as f1:
+        for line in hypys:
             f1.write(line + "\n")
     
 text = """
@@ -167,7 +167,7 @@ G) 单元四----沟通面面观 (120-131)
 H) 单元四----出言有尺 交往有度 (132-143)
 I) 单元五----学然后知不足 (144-156)
 J) 单元五----学然后知不足 (157-167)
-K) 成语 part 2 (168-207)
+K) 成语 part 2 (168-197)
 """)
 lowBound = int(limits.split(" ")[0])
 highBound = int(limits.split(" ")[1])
