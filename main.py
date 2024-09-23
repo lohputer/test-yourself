@@ -236,6 +236,7 @@ for i in range(len(answersLst)):
     print(f"Original sentence is {zaojusLst[i].replace("____", "*" + ciyus[chosenNums[i]] + "*")}")
     print()
 
+
 print("In conclusion..")
 print(f"You have gotten for some words, especially..")
 print(f"Overall, your score was {points}/{times}")
