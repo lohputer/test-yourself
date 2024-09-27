@@ -262,13 +262,13 @@ K) 成语 part 2 (168-197)
                 print(f"Overall, your score was {points}/{times}")
             else:
                 for i in range(0, len(wordLst)):
-                    print(f"词语：{wordLst[i]}")
+                    print(f"词语：{wordLst[i]} {hypys[i]}")
                     input()
                     print(f"The actual 意思：{meanings[chosenNums[i]]}")
                     print(f"The actual 造句：{zaojus[chosenNums[i]]}")
         else: 
             for i in range(lowBound, highBound):
-                print(f"词语：{ciyus[i]}")
+                print(f"词语：{ciyus[i]} {hypys[i]}")
                 print(f"意思：{meanings[i]}")
                 print(f"造句：{zaojus[i]}")
                 input("")
