@@ -156,97 +156,130 @@ exited = False
 while not exited:
     print("Welcome to the Sec 3 Chinese Revision chatbot :O")
     print("""
-    This chatbot has various functions:
-    1) Generate 选词填空 
-    Desc: Set the words you want to test, how many you want to test and then a 选词填空 will be generated for you to try.
-        
-    2) Dictionary
-    Desc: After selecting this function, you can ask for any word in any topic and find out the meaning and zaoju for it :D 
-        
-    3) Flashcards 
-    Desc: Set the words you want to test and 
-    """)
-    limits = input("""
-    In one string together, with spaces, set the lower bound and upper bound
-    A) 单元一----林黛玉进贾府 (0-11)
-    B) 单元二----吃茶喝茶品茶 (12-25)
-    C) 单元二----喜怒衰乐与健康 (26-36)
-    D) 单元三----远亲不如近邻 (37-48)
-    E) 单元三----老吾老以及人之老 (49-59)
-    F) 成语 part 1 (60-119)
-    G) 单元四----沟通面面观 (120-131)
-    H) 单元四----出言有尺 交往有度 (132-143)
-    I) 单元五----学然后知不足 (144-156)
-    J) 单元五----学然后知不足 (157-167)
-    K) 成语 part 2 (168-197)
-                
-    """)
-    lowBound = int(limits.split(" ")[0])
-    highBound = int(limits.split(" ")[1])
-    times = ""
-    while type(times) == str:
-        times = input(f"How many ciyus do you want to test? (limit:{highBound-lowBound}) You may type NA if you want to test all. ")
-        if times == "NA":
-            times = highBound-lowBound
-        elif times.isdigit():
-            times = int(times)
+This chatbot has various functions:
+1) Generate 选词填空 
+Desc: Set the words you want to test, how many you want to test and then a 选词填空 will be generated for you to try.
+    
+2) Dictionary
+Desc: After selecting this function, you can ask for any word in any topic and find out the meaning and zaoju for it :D 
+    
+3) Flashcards 
+Desc: Set the words you want to test and a random ciyu will be given. Spend some time formulating a paragraph of what it means and a zaoju for it. We will then show you a proper one afterwards.
 
-    wordLst = []
-    zaojuWordLst = []
-    zaojusLst = []
-    for i in range(times):
-        chosen = random.randint(lowBound, highBound)
-        if len(chosenNums) == len(ciyus):
-            print('We appeared to have run out of ciyus!')
-            break
-        while chosen in chosenNums:
-            chosen = random.randint(lowBound, highBound)
-        chosenNums.append(chosen)
-        zaojusLst.append(zaojus[chosen])
-        if i < times:
-            wordLst.insert(random.randint(0, len(wordLst)), ciyus[chosen])
-            zaojusLst[-1] = zaojusLst[-1].replace(ciyus[chosen], "____")
-        else:
-            zaojuWordLst.append(ciyus[chosen])
+4) Word List
+Desc: After selecting this function, you can ask for any series of words and the list of ciyus will be printed.
+""")
+    func = input("What function do you want to pick? (1/2/3/4): ")
+    while len(func) != 1 or func not in "1234":
+        print("Invalid. Try again!")
+        func = input("What function do you want to pick? (1/2/3/4): ")
 
-    for i in range(3):
-        while chosen in chosenNums:
-            chosen = random.randint(0, 197)
-        chosenNums.append(chosen)
-        wordLst.insert(random.randint(0, len(wordLst)), ciyus[chosen])
+    if func == "1" or func == "3" or func == "4":
+        limits = input("""
+In one string together, with spaces, set the lower bound and upper bound
+A) 单元一----林黛玉进贾府 (0-11)
+B) 单元二----吃茶喝茶品茶 (12-25)
+C) 单元二----喜怒衰乐与健康 (26-36)
+D) 单元三----远亲不如近邻 (37-48)
+E) 单元三----老吾老以及人之老 (49-59)
+F) 成语 part 1 (60-119)
+G) 单元四----沟通面面观 (120-131)
+H) 单元四----出言有尺 交往有度 (132-143)
+I) 单元五----学然后知不足 (144-156)
+J) 单元五----学然后知不足 (157-167)
+K) 成语 part 2 (168-197)
+                    
+""")
+        lowBound = int(limits.split(" ")[0])
+        highBound = int(limits.split(" ")[1])
+        if func == "1" or func == "3":
+            times = ""
+            while type(times) == str:
+                times = input(f"How many ciyus do you want to test? (limit:{highBound-lowBound}) You may type NA if you want to test all. ")
+                if times == "NA":
+                    times = highBound-lowBound
+                elif times.isdigit():
+                    times = int(times)
 
-    print("These are your options.")
-    print(wordLst)
-    print()
+            wordLst = []
+            zaojuWordLst = []
+            zaojusLst = []
+            for i in range(times):
+                chosen = random.randint(lowBound, highBound)
+                if len(chosenNums) == len(ciyus):
+                    print('We appeared to have run out of ciyus!')
+                    break
+                while chosen in chosenNums:
+                    chosen = random.randint(lowBound, highBound)
+                chosenNums.append(chosen)
+                zaojusLst.append(zaojus[chosen])
+                if i < times:
+                    wordLst.insert(random.randint(0, len(wordLst)), ciyus[chosen])
+                    zaojusLst[-1] = zaojusLst[-1].replace(ciyus[chosen], "____")
+                else:
+                    zaojuWordLst.append(ciyus[chosen])
 
-    for i in range(0, len(zaojusLst)):
-        print(f"Q{i+1}. {zaojusLst[i]}\n")
+            if func == "1":
+                for i in range(3):
+                    while chosen in chosenNums:
+                        chosen = random.randint(0, 197)
+                    chosenNums.append(chosen)
+                    wordLst.insert(random.randint(0, len(wordLst)), ciyus[chosen])
 
-    confirm = False
-    answersLst = []
-    while not confirm:
-        for i in range(0, len(zaojusLst)):
-            answersLst.append(str(i+1) + ": " + input(f"What is your answer for Q{i+1}?: "))
-        print("\nWould you like to lock in these answers?")
-        print("\n".join(answersLst))
-        check = input("Y to confirm.")
-        if check.upper() == "Y":
-            print("Alright!")
-            confirm = True
-        else:
-            print("Sure, let's go again!")
+                print("These are your options.")
+                print(wordLst)
+                print()
 
-    for i in range(len(answersLst)):
-        answersLst[i] = answersLst[i].split(": ")[1]
-        if answersLst[i].strip() == ciyus[chosenNums[i]]:
-            points += 1
-            print(f"You got Q{i+1} correct!")
-        else:
-            print(f"You got Q{i+1} wrong :C, the answer is {ciyus[chosenNums[i]]}")
-            print(f"The meaning of {ciyus[chosenNums[i]]} is {meanings[chosenNums[i]]}")
-        print(f"Original sentence is {zaojusLst[i].replace("____", "*" + ciyus[chosenNums[i]] + "*")}")
-        print()
+                for i in range(0, len(zaojusLst)):
+                    print(f"Q{i+1}. {zaojusLst[i]}\n")
 
-    print("In conclusion..")
-    print(f"You have gotten for some words, especially..")
-    print(f"Overall, your score was {points}/{times}")
+                confirm = False
+                answersLst = []
+                while not confirm:
+                    for i in range(0, len(zaojusLst)):
+                        answersLst.append(str(i+1) + ": " + input(f"What is your answer for Q{i+1}?: "))
+                    print("\nWould you like to lock in these answers?")
+                    print("\n".join(answersLst))
+                    check = input("Y to confirm.")
+                    if check.upper() == "Y":
+                        print("Alright!")
+                        confirm = True
+                    else:
+                        print("Sure, let's go again!")
+
+                for i in range(len(answersLst)):
+                    answersLst[i] = answersLst[i].split(": ")[1]
+                    if answersLst[i].strip() == ciyus[chosenNums[i]]:
+                        points += 1
+                        print(f"You got Q{i+1} correct!")
+                    else:
+                        print(f"You got Q{i+1} wrong :C, the answer is {ciyus[chosenNums[i]]}")
+                        print(f"The meaning of {ciyus[chosenNums[i]]} is {meanings[chosenNums[i]]}")
+                    print(f"Original sentence is {zaojusLst[i].replace("____", "*" + ciyus[chosenNums[i]] + "*")}")
+                    print()
+                print("In conclusion..")
+                print(f"You have gotten for some words, especially..")
+                print(f"Overall, your score was {points}/{times}")
+            else:
+                for i in range(0, len(wordLst)):
+                    print(f"词语：{wordLst[i]}")
+                    input()
+                    print(f"The actual 意思：{meanings[chosenNums[i]]}")
+                    print(f"The actual 造句：{zaojus[chosenNums[i]]}")
+        else: 
+            for i in range(lowBound, highBound):
+                print(f"词语：{ciyus[i]}")
+                print(f"意思：{meanings[i]}")
+                print(f"造句：{zaojus[i]}")
+                input("")
+    else:
+        exit2 = False
+        while not exit2:
+            chosenWord = input("Enter a valid 词语 to check the meaning of. ")
+            while chosenWord not in ciyus:
+                print('Not in sec 3 syllabus.')
+                chosenWord = input("Enter a valid 词语 to check the meaning of. ")
+            print()
+            print(f"意思：{meanings[ciyus.find(chosenWord)]}")
+            print(f"造句：{zaojus[ciyus.find(chosenWord)]}")
+            exit2 = input("Would you like to continue using the dictionary? (Y/N) ").upper() == "N"
