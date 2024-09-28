@@ -262,11 +262,14 @@ K) 成语 part 2 (168-197)
                 print(f"You have gotten for some words, especially..")
                 print(f"Overall, your score was {points}/{times}")
             else:
-                for i in range(0, len(wordLst)):
-                    print(f"词语：{wordLst[i]} {hypys[i]}")
-                    input()
-                    print(f"The actual 意思：{meanings[chosenNums[i]]}")
-                    print(f"The actual 造句：{zaojus[chosenNums[i]]}")
+                for num in chosenNums:
+                    print(f"词语：{ciyus[num]} {hypys[num]}")
+                    input("What do you think is the 意思？")
+                    input("Give a 造句：  ")
+                    print()
+                    print(f"The actual 意思：{meanings[num]}")
+                    print(f"Proper example of a 造句：{zaojus[num]}")
+                    print()
         else: 
             for i in range(lowBound, highBound):
                 print(f"词语：{ciyus[i]} {hypys[i]}")
