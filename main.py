@@ -154,6 +154,10 @@ correctTimes = 0
 points = 0
 exited = False
 while not exited:
+    answersLst = []
+    wordLst = []
+    zaojuWordLst = []
+    zaojusLst = []
     print("Welcome to the Sec 3 Chinese Revision chatbot :O")
     print("""
 This chatbot has various functions:
