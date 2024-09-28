@@ -252,7 +252,7 @@ K) 成语 part 2 (168-197)
                     else:
                         print(f"You got Q{i+1} wrong :C, the answer is {ciyus[chosenNums[i]]}")
                         print(f"The meaning of {ciyus[chosenNums[i]]} is {meanings[chosenNums[i]]}")
-                    print(f"Original sentence is {zaojusLst[i].replace("____", "*" + ciyus[chosenNums[i]] + "*")}")
+                    print(f'Original sentence is {zaojusLst[i].replace("____", "*" + ciyus[chosenNums[i]] + "*")}')
                     print()
                 print("In conclusion..")
                 print(f"You have gotten for some words, especially..")
