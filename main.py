@@ -212,6 +212,7 @@ K) 成语 part 2 (168-197)
                 while chosen in chosenNums:
                     chosen = random.randint(lowBound, highBound)
                 chosenNums.append(chosen)
+                wordLst.insert(random.randint(0, len(wordLst)), ciyus[chosen])
                 zaojusLst.append(zaojus[chosen].replace(ciyus[chosen], "____"))
 
             if func == "1":
@@ -243,7 +244,6 @@ K) 成语 part 2 (168-197)
                         print("Sure, let's go again!")
                         answersLst = []
 
-                print(answersLst)
                 for i in range(len(answersLst)):
                     answersLst[i] = answersLst[i].split(": ")[1]
                     if answersLst[i].strip() == ciyus[chosenNums[i]]:
