@@ -212,12 +212,7 @@ K) 成语 part 2 (168-197)
                 while chosen in chosenNums:
                     chosen = random.randint(lowBound, highBound)
                 chosenNums.append(chosen)
-                zaojusLst.append(zaojus[chosen])
-                if i < times:
-                    wordLst.insert(random.randint(0, len(wordLst)), ciyus[chosen])
-                    zaojusLst[-1] = zaojusLst[-1].replace(ciyus[chosen], "____")
-                else:
-                    zaojuWordLst.append(ciyus[chosen])
+                zaojusLst.append(zaojus[chosen].replace(ciyus[chosen], "____"))
 
             if func == "1":
                 for i in range(3):
@@ -246,7 +241,9 @@ K) 成语 part 2 (168-197)
                         confirm = True
                     else:
                         print("Sure, let's go again!")
+                        answersLst = []
 
+                print(answersLst)
                 for i in range(len(answersLst)):
                     answersLst[i] = answersLst[i].split(": ")[1]
                     if answersLst[i].strip() == ciyus[chosenNums[i]]:
@@ -275,11 +272,16 @@ K) 成语 part 2 (168-197)
     else:
         exit2 = False
         while not exit2:
-            chosenWord = input("Enter a valid 词语 to check the meaning of. ")
+            chosenWord = input("Enter a valid 词语 to check the meaning of. Type 'X' to exit. ")
             while chosenWord not in ciyus:
+                if chosenWord == "X":
+                    exit2 = True
+                    break
                 print('Not in sec 3 syllabus.')
-                chosenWord = input("Enter a valid 词语 to check the meaning of. ")
+                chosenWord = input("Enter a valid 词语 to check the meaning of. Type 'X' to exit. ")
             print()
+            if chosenWord == "X":
+                break
             print(f"意思：{meanings[ciyus.find(chosenWord)]}")
             print(f"造句：{zaojus[ciyus.find(chosenWord)]}")
             exit2 = input("Would you like to continue using the dictionary? (Y/N) ").upper() == "N"
