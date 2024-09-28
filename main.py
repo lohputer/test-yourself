@@ -142,7 +142,7 @@ text = """
 解释：自己不出力而享受别人取得的成果。
 例：李经理从没出过力，计划完成后他却坐享其成，将功劳归于自己，大家都感到愤愤不平。
 """
-format_sentences(text)
+
 with open("ciyu.txt", encoding='utf-8') as f : ciyus = f.read().split('\n')
 with open("hypy.txt", encoding='utf-8') as f : hypys = f.read().split('\n')
 with open("zaoju.txt", encoding='utf-8') as f : zaojus = f.read().split('\n')
