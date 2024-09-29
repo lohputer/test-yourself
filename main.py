@@ -154,6 +154,7 @@ correctTimes = 0
 points = 0
 exited = False
 while not exited:
+    points = 0
     answersLst = []
     wordLst = []
     zaojuWordLst = []
