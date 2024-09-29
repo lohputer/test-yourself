@@ -158,6 +158,7 @@ while not exited:
     wordLst = []
     zaojuWordLst = []
     zaojusLst = []
+    chosenNums = []
     print("Welcome to the Sec 3 Chinese Revision chatbot :O")
     print("""
 This chatbot has various functions:
